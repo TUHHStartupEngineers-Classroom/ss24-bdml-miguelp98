@@ -1,6 +1,6 @@
 ---
-title: "Tidyverse"
-author: "Joschka Schwarz"
+title: "Machine Learning Fundamentals"
+author: "Miguel"
 ---
 
 ::: callout-note

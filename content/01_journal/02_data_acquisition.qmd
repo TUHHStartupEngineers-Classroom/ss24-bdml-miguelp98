@@ -1,6 +1,6 @@
 ---
-title: "Data Acquisition"
-author: "Joschka Schwarz"
+title: "Supervised ML - Regression (I)"
+author: "Miguel"
 ---
 
 ::: callout-note
