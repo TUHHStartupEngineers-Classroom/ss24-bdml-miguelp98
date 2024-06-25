@@ -39,14 +39,7 @@
     "href": "content/01_journal/01_tidyverse.html",
     "title": "Machine Learning Fundamentals",
     "section": "",
-    "text": "Note\n\n\n\nYou can delete everything in here and start fresh.\nThis is a .qmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a # in front of your text, it will create a top level-header.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
-    "objectID": "content/01_journal/01_tidyverse.html#header-2",
-    "href": "content/01_journal/01_tidyverse.html#header-2",
-    "title": "Machine Learning Fundamentals",
-    "section": "\n2.1 Header 2",
-    "text": "2.1 Header 2\nHeader 3\nHeader 4\nHeader 5\nHeader 6"
+    "text": "#&gt; Rows: 1,225,765\n#&gt; Columns: 8\n#&gt; $ symbol   &lt;chr&gt; \"MSFT\", \"MSFT\", \"MSFT\", \"MSFT\", \"MSFT\", \"MSFT\", \"MSFT\", \"MSFT…\n#&gt; $ date     &lt;date&gt; 2009-01-02, 2009-01-05, 2009-01-06, 2009-01-07, 2009-01-08, …\n#&gt; $ open     &lt;dbl&gt; 19.53, 20.20, 20.75, 20.19, 19.63, 20.17, 19.71, 19.52, 19.53…\n#&gt; $ high     &lt;dbl&gt; 20.40, 20.67, 21.00, 20.29, 20.19, 20.30, 19.79, 19.99, 19.68…\n#&gt; $ low      &lt;dbl&gt; 19.37, 20.06, 20.61, 19.48, 19.55, 19.41, 19.30, 19.52, 19.01…\n#&gt; $ close    &lt;dbl&gt; 20.33, 20.52, 20.76, 19.51, 20.12, 19.52, 19.47, 19.82, 19.09…\n#&gt; $ volume   &lt;dbl&gt; 50084000, 61475200, 58083400, 72709900, 70255400, 49815300, 5…\n#&gt; $ adjusted &lt;dbl&gt; 15.86624, 16.01451, 16.20183, 15.22628, 15.70234, 15.23408, 1…"
   },
   {
     "objectID": "Chapter_1_Challenge.html",
