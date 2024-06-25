@@ -1,0 +1,19 @@
+{
+  "hash": "05a0f578ea739a295f6b1768bc6728a0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Explaining Black-Box Models With LIME\"\nauthor: \"Miguel Peñate\"\nformat:\n  html:\n    code-fold: true\n    self-contained: false\n---\n\n::: {.cell}\n\n:::\n\n![Explicación de LIME](case1.png)\n\n---\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

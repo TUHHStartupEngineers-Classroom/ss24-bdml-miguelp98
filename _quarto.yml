@@ -24,10 +24,14 @@ website:
             file: content/01_journal/04_data_visualization.qmd
           - text: "05 Performance Measures"
             file: content/01_journal/05_performance_measures.qmd
+          - text: "06 Explainig Black-Box Models With LIME"
+            file: content/01_journal/06_explaining_black-box_models_with_LIME.qmd
       - text: "Class notes"
         file: content/02_notes/05_class_notes.qmd
       - text: "Links"
         file: content/03_other/06_links.qmd
+
+
 
 format:
   html:

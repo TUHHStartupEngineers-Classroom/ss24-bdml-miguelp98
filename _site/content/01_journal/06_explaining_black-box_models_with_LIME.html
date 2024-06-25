@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Miguel Peñate">
-<title>MyLabJournal - Automated Machine Learning with H20 (I)</title>
+<title>MyLabJournal - Explaining Black-Box Models With LIME</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Automated Machine Learning with H20 (I)</h1>
+<h1 class="title">Explaining Black-Box Models With LIME</h1>
 </div>
 
 
@@ -162,92 +162,18 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header><section id="task" class="level3"><h3 class="anchored" data-anchor-id="task">TASK</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="03_data_wrangling_files/figure-html/plot-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
+</header><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="case1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Explicación de LIME"><img src="case1.png" class="img-fluid figure-img" alt="Explicación de LIME"></a></p>
+<figcaption>Explicación de LIME</figcaption></figure>
 </div>
-</div>
-</div>
-<ol type="1">
-<li>Compensation Features</li>
-</ol>
-<p>What can you deduce about the interaction between Monthly Income and Attrition?</p>
-<p>Those that are leaving the company have a higher Monthly Income That those are staying have a lower Monthly Income <strong>✔ Those that are leaving have a lower Monthly Income</strong> It’s difficult to deduce anything based on the visualization</p>
-<p>Justification: In the boxplot for Monthly Income, it is observed that employees who have left the company (Yes) have a lower monthly income range compared to those who have stayed (No). In addition, the density of monthly income for those who have left the company is higher at the lower income levels.</p>
-<p><strong>Question 2</strong> What can you deduce about the interaction between Percent Salary Hike and Attrition?</p>
-<p>Those that are leaving the company have a higher Percent Salary Hike Those that are staying have a lower Percent Salary Hike ** ✔Those that are leaving have lower Percent Salary Hike** It’s difficult to deduce anything based on the visualization</p>
-<p>In the boxplot for Percent Salary Hike, it can be seen that employees who have left the company (Yes) have, on average, a lower percentage salary increase compared to those who have stayed (No).</p>
-<p><strong>Question 3</strong> What can you deduce about the interaction between Stock Option Level and Attrition?</p>
-<p>Those that are leaving the company have a higher stock option level Those that are staying have a higher stock option level <strong>✔ It’s difficult to deduce anything based on the visualization</strong></p>
-<p>The box-and-whisker plot shows that employees who stay (No) have a distribution with higher levels of stock options compared to employees who leave (Yes), who tend to have lower levels.</p>
 <hr>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="03_data_wrangling_files/figure-html/plot2-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Question 4</strong></p>
-<p>What can you deduce about the interaction between Environment Satisfaction and Attrition?</p>
-<p>A higher proportion of those leaving have a low environment satisfaction level <strong>✔ A higher proportion of those leaving have a high environment satisfaction level</strong> It’s difficult to deduce anything based on the visualization</p>
-<p>Low levels of satisfaction with the environment (1 and 2) show a higher proportion of employees leaving the company compared to those with high levels of satisfaction (3 and 4). This can be seen in the distribution of the density curves, where the areas under the curves for “Yes” are larger at lower levels of satisfaction with the environment.</p>
-<p><strong>Question 5</strong> What can you deduce about the interaction between Work Life Balance and Attrition</p>
-<p><strong>✔Those that are leaving have higher density of 2’s and 3’s</strong> Those that are staying have a higher density of 2’s and 3’s Those that are staying have a lower density of 2’s and 3’s It’s difficult to deduce anything based on the visualization</p>
-<p>Justification: In the graph, the density of those who leave the company (blue colour) is highest at values 2 and 3 for Work Life Balance. This indicates that people with these work-life balance values have a higher tendency to leave the company.</p>
-<hr>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="03_data_wrangling_files/figure-html/plot3-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="03_data_wrangling_files/figure-html/plot4-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Question 7</strong> What can you deduce about the interaction between Over Time and Attrition?</p>
-<p><strong>✔ The proportion of those leaving that are working Over Time are high compared to those that are not leaving</strong> The proportion of those staying that are working Over Time are high compared to those that are not staying</p>
-<p><strong>Justification:</strong> In the graph, it is observed that a higher proportion of employees working overtime are leaving the company (blue colour) compared to those who are not working overtime. This indicates that working overtime is associated with a higher attrition rate.</p>
-<hr>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="03_data_wrangling_files/figure-html/plot5-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Question 8</strong> What can you deduce about the interaction between Training Times Last Year and Attrition</p>
-<p>People that leave tend to have more annual trainings <strong>✔ People that leave tend to have less annual trainings</strong> It’s difficult to deduce anything based on the visualization</p>
-<p>Justification: In the graph, we observe that those who leave the company (blue colour) tend to have fewer trainings per year compared to those who stay (red colour). The density is higher at lower values of “Training Times Last Year” for leavers, indicating that a lower amount of training is associated with a higher attrition rate.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="03_data_wrangling_files/figure-html/plot6-1.png" class="img-fluid figure-img" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Question 9</strong> What can you deduce about the interaction between Years At Company and Attrition</p>
-<p>People that leave tend to have more working years at the company <strong>✔ People that leave tend to have less working years at the company</strong> It’s difficult to deduce anything based on the visualization</p>
-<p>Justification: In the graph, we observe that the density of those who leave the company (blue colour) is higher in the first years of employment compared to those who stay (red colour). This indicates that people who have been with the company for fewer years tend to leave more than those who have been with the company longer.</p>
-<p><strong>Question 10</strong> What can you deduce about the interaction between Years Since Last Promotion and Attrition?</p>
-<p>Those that are leaving have more years since last promotion than those that are staying <strong>✔ Those that are leaving have fewer years since last promotion than those that are staying</strong> It’s difficult to deduce anything based on the visualization</p>
-<p>Justification: In the graph, we can observe that the density of those who leave the company (blue colour) is higher in the first years since their last promotion compared to those who stay (red colour). This indicates that people who have spent less time since their last promotion tend to leave the company more than those who have spent more time since their last promotion.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Explicación de LIME</span>
+</div>
+
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
