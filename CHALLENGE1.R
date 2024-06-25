@@ -1,0 +1,136 @@
+library(tidyverse)
+library(tidyquant)
+library(broom)
+library(umap)
+
+# STOCK PRICES ----
+sp_500_prices_tbl <- read_rds("sp_500_prices_tbl.rds")
+sp_500_prices_tbl
+
+# SECTOR INFORMATION
+sp_500_index_tbl <- read_rds("sp_500_index_tbl.rds")
+sp_500_index_tbl
+
+sp_500_prices_tbl %>% glimpse()
+
+# Convert stock prices to a standardized format (daily returns) ----
+sp_500_daily_returns_tbl <- sp_500_prices_tbl %>%
+  select(symbol, date, adjusted) %>%
+  filter(date >= "2018-01-01") %>%
+  group_by(symbol) %>%
+  mutate(lag_adjusted = lag(adjusted, 1)) %>%
+  filter(!is.na(lag_adjusted)) %>%
+  mutate(diff = adjusted - lag_adjusted,
+         pct_return = diff / lag_adjusted) %>%
+  select(symbol, date, pct_return) %>%
+  ungroup()
+
+# Print the result
+sp_500_daily_returns_tbl
+
+# Convert to User-Item Format
+stock_date_matrix_tbl <- sp_500_daily_returns_tbl %>%
+  select(symbol, date, pct_return) %>%
+  pivot_wider(names_from = date, values_from = pct_return, values_fill = 0)
+
+# Output: stock_date_matrix_tbl
+stock_date_matrix_tbl
+
+# Perform K-Means Clustering ----
+
+# Drop the non-numeric column, symbol
+numeric_stock_matrix_tbl <- stock_date_matrix_tbl %>%
+  select(-symbol)
+
+# Create kmeans_obj for 4 centers
+kmeans_obj <- numeric_stock_matrix_tbl %>%
+  kmeans(centers = 4, nstart = 20)
+
+# Use glance() to get the tot.withinss
+tot_withinss <- glance(kmeans_obj)
+
+# Find the optimal value of K ----
+
+kmeans_mapper <- function(centers = 3) {
+  stock_date_matrix_tbl %>%
+    select(-symbol) %>%
+    kmeans(centers = centers, nstart = 20)
+}
+
+k_means_mapped_tbl <- tibble(centers = 1:30) %>%
+  mutate(k_means = map(centers, kmeans_mapper)) %>%
+  mutate(glance = map(k_means, glance))
+
+k_means_mapped_tbl %>%
+  unnest(glance) %>%
+  select(centers, tot.withinss) %>%
+  
+  # Visualization
+  ggplot(aes(x = centers, y = tot.withinss)) +
+  geom_point(color = "#2DC6D6", size = 4) +
+  geom_line(color = "#2DC6D6", size = 1) +
+  
+  # Add title and labels
+  labs(title = "Scree Plot",
+       subtitle = "Measures the total within-cluster sum of squares for each K",
+       x = "Number of Centers (K)",
+       y = "Total Within-Cluster Sum of Squares (tot.withinss)",
+       caption = "Conclusion: Based on the Scree Plot, we can select the optimal number of clusters.")
+
+# Apply UMAP ----
+
+# Apply the umap() function to the stock_date_matrix_tbl, excluding the symbol column
+umap_results <- stock_date_matrix_tbl %>%
+  select(-symbol) %>%
+  umap()
+
+# Convert umap results to tibble with symbols
+umap_results_tbl <- umap_results$layout %>%
+  as_tibble() %>%
+  bind_cols(stock_date_matrix_tbl %>% select(symbol))
+
+# Visualize UMAP results
+umap_results_tbl %>%
+  ggplot(aes(x = V1, y = V2, label = symbol)) +
+  geom_point(alpha = 0.5) +
+  theme_tq() +
+  labs(title = "UMAP Projection",
+       subtitle = "2D representation of stock symbols based on daily returns")
+
+# Combine K-Means and UMAP ----
+
+# Get the kmeans_obj from the 10th center
+kmeans_10_obj <- k_means_mapped_tbl %>%
+  pull(k_means) %>%
+  pluck(10)
+
+# Convert it to a tibble with broom
+kmeans_10_clusters_tbl <- kmeans_10_obj %>%
+  augment(stock_date_matrix_tbl) %>%
+  select(symbol, .cluster)
+
+# Bind data together
+umap_kmeans_results_tbl <- umap_results_tbl %>%
+  left_join(kmeans_10_clusters_tbl)
+
+# Visualize combined K-Means and UMAP results ----
+
+# Obtener los valores únicos de los clusters
+unique_clusters <- unique(umap_kmeans_results_tbl$.cluster)
+
+# Definir los colores manualmente basados en la cantidad de clusters únicos
+num_clusters <- length(unique_clusters)
+cluster_colors <- c("#2d72d6", "#2dc6d6", "#2dd692", "#d65b2d", "#e69f00", "#56b4e9", "#009e73", "#f0e442", "#0072b2", "#d55e00")[1:num_clusters]
+
+# Mapear los valores de los clusters a los colores
+names(cluster_colors) <- unique_clusters
+
+# Visualizar los resultados combinados de K-Means y UMAP
+umap_kmeans_results_tbl %>%
+  ggplot(aes(V1, V2, color = as.factor(.cluster))) +
+  geom_point(alpha = 0.5) +
+  scale_color_manual(values = cluster_colors) +
+  labs(title = "Customer Segmentation: 2D Projection",
+       subtitle = "UMAP 2D Projection with K-Means Cluster Assignment",
+       caption = "Conclusion: 3 Customer Segments identified using 2 algorithms") +
+  theme_tq()

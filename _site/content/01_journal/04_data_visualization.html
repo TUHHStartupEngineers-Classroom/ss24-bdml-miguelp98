@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Joschka Schwarz">
-
-<title>MyLabJournal - Data Visualization</title>
+<meta name="author" content="Miguel Peñate">
+<title>MyLabJournal - Automated Machine Learning with H2O (II)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +19,6 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -42,8 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -69,17 +64,13 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
+}</script><link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">MyLabJournal</span>
@@ -91,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -99,25 +90,29 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-journal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Journal</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-journal">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-journal">
+<li>
     <a class="dropdown-item" href="../../content/01_journal/01_tidyverse.html">
- <span class="dropdown-text">01 Tidyverse</span></a>
+ <span class="dropdown-text">01 Machine Learning Fundamentals</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/02_data_acquisition.html">
- <span class="dropdown-text">02 Data Acquisition</span></a>
+ <span class="dropdown-text">02 Supervised ML - Regression</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/03_data_wrangling.html">
- <span class="dropdown-text">03 Data Wrangling</span></a>
+ <span class="dropdown-text">03 Automated Machine Learning with H20 (I)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/04_data_visualization.html">
  <span class="dropdown-text">04 Data Visualization</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../content/01_journal/05_performance_measures.html">
+ <span class="dropdown-text">05 Performance Measures</span></a>
+  </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item">
     <a class="nav-link" href="../../content/02_notes/05_class_notes.html"> 
 <span class="menu-text">Class notes</span></a>
@@ -127,26 +122,20 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Links</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Data Visualization</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Automated Machine Learning with H2O (II)</h1>
 </div>
 
 
@@ -156,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Joschka Schwarz </p>
+             <p>Miguel Peñate </p>
           </div>
   </div>
     
@@ -166,27 +155,299 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
+</header><div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  Connection successful!
+#&gt; 
+#&gt; R is connected to the H2O cluster: 
+#&gt;     H2O cluster uptime:         22 hours 39 minutes 
+#&gt;     H2O cluster timezone:       Europe/Berlin 
+#&gt;     H2O data parsing timezone:  UTC 
+#&gt;     H2O cluster version:        3.44.0.3 
+#&gt;     H2O cluster version age:    6 months and 2 days 
+#&gt;     H2O cluster name:           H2O_started_from_R_migue_pzv484 
+#&gt;     H2O cluster total nodes:    1 
+#&gt;     H2O cluster total memory:   3.22 GB 
+#&gt;     H2O cluster total cores:    6 
+#&gt;     H2O cluster allowed cores:  6 
+#&gt;     H2O cluster healthy:        TRUE 
+#&gt;     H2O Connection ip:          localhost 
+#&gt;     H2O Connection port:        54321 
+#&gt;     H2O Connection proxy:       NA 
+#&gt;     H2O Internal Security:      FALSE 
+#&gt;     R Version:                  R version 4.3.3 (2024-02-29 ucrt)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Rows: 19,053
+#&gt; Columns: 23
+#&gt; $ sku               &lt;dbl&gt; 1113121, 1113268, 1113874, 1114222, 1114823, 1115453…
+#&gt; $ national_inv      &lt;dbl&gt; 0, 0, 20, 0, 0, 55, -34, 4, 2, -7, 1, 2, 0, 0, 0, 0,…
+#&gt; $ lead_time         &lt;dbl&gt; 8, 8, 2, 8, 12, 8, 8, 9, 8, 8, 8, 8, 12, 2, 12, 4, 2…
+#&gt; $ in_transit_qty    &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0…
+#&gt; $ forecast_3_month  &lt;dbl&gt; 6, 2, 45, 9, 31, 216, 120, 43, 4, 56, 2, 5, 5, 54, 4…
+#&gt; $ forecast_6_month  &lt;dbl&gt; 6, 3, 99, 14, 31, 360, 240, 67, 6, 96, 4, 9, 6, 72, …
+#&gt; $ forecast_9_month  &lt;dbl&gt; 6, 4, 153, 21, 31, 492, 240, 115, 9, 112, 6, 13, 9, …
+#&gt; $ sales_1_month     &lt;dbl&gt; 0, 1, 16, 5, 7, 30, 83, 5, 1, 13, 0, 1, 0, 0, 1, 0, …
+#&gt; $ sales_3_month     &lt;dbl&gt; 4, 2, 42, 17, 15, 108, 122, 22, 5, 30, 2, 5, 4, 0, 3…
+#&gt; $ sales_6_month     &lt;dbl&gt; 9, 3, 80, 36, 33, 275, 144, 40, 6, 56, 3, 8, 5, 0, 4…
+#&gt; $ sales_9_month     &lt;dbl&gt; 12, 3, 111, 43, 47, 340, 165, 58, 9, 76, 4, 11, 6, 0…
+#&gt; $ min_bank          &lt;dbl&gt; 0, 0, 10, 0, 2, 51, 33, 4, 2, 0, 0, 0, 3, 4, 0, 0, 0…
+#&gt; $ potential_issue   &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "No", "No"…
+#&gt; $ pieces_past_due   &lt;dbl&gt; 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+#&gt; $ perf_6_month_avg  &lt;dbl&gt; 0.90, 0.96, 0.81, 0.96, 0.98, 0.00, 1.00, 0.69, 1.00…
+#&gt; $ perf_12_month_avg &lt;dbl&gt; 0.89, 0.97, 0.88, 0.98, 0.98, 0.00, 0.97, 0.68, 0.95…
+#&gt; $ local_bo_qty      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 34, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, …
+#&gt; $ deck_risk         &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "No", "No"…
+#&gt; $ oe_constraint     &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "No", "No"…
+#&gt; $ ppap_risk         &lt;chr&gt; "No", "No", "No", "No", "No", "Yes", "No", "No", "No…
+#&gt; $ stop_auto_buy     &lt;chr&gt; "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Ye…
+#&gt; $ rev_stop          &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "No", "No"…
+#&gt; $ went_on_backorder &lt;chr&gt; "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Ye…</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==                                                                    |   3%
+#&gt; 17:15:47.251: AutoML: XGBoost is not available; skipping it.
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |========                                                              |  12%
+  |                                                                            
+  |============                                                          |  18%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |===================                                                   |  27%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |=============================                                         |  41%
+  |                                                                            
+  |================================                                      |  45%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |======================================                                |  55%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |==============================================                        |  65%
+  |                                                                            
+  |=================================================                     |  70%
+  |                                                                            
+  |=====================================================                 |  76%
+  |                                                                            
+  |========================================================              |  81%
+  |                                                                            
+  |============================================================          |  85%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
+  |====================================================================  |  97%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;                                                  model_id      rmse        mse
+#&gt; 1 StackedEnsemble_BestOfFamily_4_AutoML_8_20240622_171547 0.2227323 0.04960967
+#&gt; 2    StackedEnsemble_AllModels_4_AutoML_8_20240622_171547 0.2228932 0.04968140
+#&gt; 3    StackedEnsemble_AllModels_3_AutoML_8_20240622_171547 0.2237833 0.05007899
+#&gt; 4 StackedEnsemble_BestOfFamily_3_AutoML_8_20240622_171547 0.2240453 0.05019632
+#&gt; 5    StackedEnsemble_AllModels_2_AutoML_8_20240622_171547 0.2240642 0.05020478
+#&gt; 6    StackedEnsemble_AllModels_1_AutoML_8_20240622_171547 0.2265414 0.05132100
+#&gt;          mae      rmsle mean_residual_deviance
+#&gt; 1 0.09773137 0.09051802             0.04960967
+#&gt; 2 0.09987629 0.09053519             0.04968140
+#&gt; 3 0.11761368 0.09141547             0.05007899
+#&gt; 4 0.11887668 0.09152755             0.05019632
+#&gt; 5 0.11860405 0.09153442             0.05020478
+#&gt; 6 0.12001627 0.09248435             0.05132100
+#&gt; 
+#&gt; [26 rows x 6 columns]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Model Details:
+#&gt; ==============
+#&gt; 
+#&gt; H2ORegressionModel: stackedensemble
+#&gt; Model ID:  StackedEnsemble_BestOfFamily_4_AutoML_8_20240622_171547 
+#&gt; Model Summary for Stacked Ensemble: 
+#&gt;                                     key            value
+#&gt; 1                     Stacking strategy cross_validation
+#&gt; 2  Number of base models (used / total)              4/4
+#&gt; 3      # GBM base models (used / total)              1/1
+#&gt; 4      # DRF base models (used / total)              2/2
+#&gt; 5      # GLM base models (used / total)              1/1
+#&gt; 6                 Metalearner algorithm              GBM
+#&gt; 7    Metalearner fold assignment scheme           Random
+#&gt; 8                    Metalearner nfolds                5
+#&gt; 9               Metalearner fold_column               NA
+#&gt; 10   Custom metalearner hyperparameters             None
+#&gt; 
+#&gt; 
+#&gt; H2ORegressionMetrics: stackedensemble
+#&gt; ** Reported on training data. **
+#&gt; 
+#&gt; MSE:  0.02111206
+#&gt; RMSE:  0.1452999
+#&gt; MAE:  0.06251147
+#&gt; RMSLE:  0.05870329
+#&gt; Mean Residual Deviance :  0.02111206
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; H2ORegressionMetrics: stackedensemble
+#&gt; ** Reported on cross-validation data. **
+#&gt; ** 5-fold cross-validation on training data (Metrics computed for combined holdout predictions) **
+#&gt; 
+#&gt; MSE:  0.04960967
+#&gt; RMSE:  0.2227323
+#&gt; MAE:  0.09773137
+#&gt; RMSLE:  0.09051802
+#&gt; Mean Residual Deviance :  0.04960967
+#&gt; 
+#&gt; 
+#&gt; Cross-Validation Metrics Summary: 
+#&gt;                            mean       sd cv_1_valid cv_2_valid cv_3_valid
+#&gt; mae                    0.097706 0.002865   0.095470   0.097543   0.102660
+#&gt; mean_residual_deviance 0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; mse                    0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; r2                     0.521512 0.046619   0.571272   0.516330   0.506078
+#&gt; residual_deviance      0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; rmse                   0.222581 0.007829   0.217634   0.224592   0.233301
+#&gt; rmsle                  0.090470 0.002838   0.088585   0.091107   0.094128
+#&gt;                        cv_4_valid cv_5_valid
+#&gt; mae                      0.096457   0.096401
+#&gt; mean_residual_deviance   0.045247   0.050474
+#&gt; mse                      0.045247   0.050474
+#&gt; r2                       0.559512   0.454369
+#&gt; residual_deviance        0.045247   0.050474
+#&gt; rmse                     0.212713   0.224664
+#&gt; rmsle                    0.086819   0.091711</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;    predict
+#&gt; 1 1.491070
+#&gt; 2 1.687386
+#&gt; 3 1.833314
+#&gt; 4 1.842537
+#&gt; 5 1.871452
+#&gt; 6 1.715574
+#&gt; 
+#&gt; [2858 rows x 1 column]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "C:\\Users\\migue\\Desktop\\Hamburg\\TUHH\\ss24-bdml-miguelp98\\h2o_models\\StackedEnsemble_BestOfFamily_4_AutoML_8_20240622_171547"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Model Details:
+#&gt; ==============
+#&gt; 
+#&gt; H2ORegressionModel: stackedensemble
+#&gt; Model ID:  StackedEnsemble_BestOfFamily_4_AutoML_8_20240622_171547 
+#&gt; Model Summary for Stacked Ensemble: 
+#&gt;                                     key            value
+#&gt; 1                     Stacking strategy cross_validation
+#&gt; 2  Number of base models (used / total)              4/4
+#&gt; 3      # GBM base models (used / total)              1/1
+#&gt; 4      # DRF base models (used / total)              2/2
+#&gt; 5      # GLM base models (used / total)              1/1
+#&gt; 6                 Metalearner algorithm              GBM
+#&gt; 7    Metalearner fold assignment scheme           Random
+#&gt; 8                    Metalearner nfolds                5
+#&gt; 9               Metalearner fold_column               NA
+#&gt; 10   Custom metalearner hyperparameters             None
+#&gt; 
+#&gt; 
+#&gt; H2ORegressionMetrics: stackedensemble
+#&gt; ** Reported on training data. **
+#&gt; 
+#&gt; MSE:  0.02111206
+#&gt; RMSE:  0.1452999
+#&gt; MAE:  0.06251147
+#&gt; RMSLE:  0.05870329
+#&gt; Mean Residual Deviance :  0.02111206
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; H2ORegressionMetrics: stackedensemble
+#&gt; ** Reported on cross-validation data. **
+#&gt; ** 5-fold cross-validation on training data (Metrics computed for combined holdout predictions) **
+#&gt; 
+#&gt; MSE:  0.04960967
+#&gt; RMSE:  0.2227323
+#&gt; MAE:  0.09773137
+#&gt; RMSLE:  0.09051802
+#&gt; Mean Residual Deviance :  0.04960967
+#&gt; 
+#&gt; 
+#&gt; Cross-Validation Metrics Summary: 
+#&gt;                            mean       sd cv_1_valid cv_2_valid cv_3_valid
+#&gt; mae                    0.097706 0.002865   0.095470   0.097543   0.102660
+#&gt; mean_residual_deviance 0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; mse                    0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; r2                     0.521512 0.046619   0.571272   0.516330   0.506078
+#&gt; residual_deviance      0.049591 0.003491   0.047365   0.050442   0.054429
+#&gt; rmse                   0.222581 0.007829   0.217634   0.224592   0.233301
+#&gt; rmsle                  0.090470 0.002838   0.088585   0.091107   0.094128
+#&gt;                        cv_4_valid cv_5_valid
+#&gt; mae                      0.096457   0.096401
+#&gt; mean_residual_deviance   0.045247   0.050474
+#&gt; mse                      0.045247   0.050474
+#&gt; r2                       0.559512   0.454369
+#&gt; residual_deviance        0.045247   0.050474
+#&gt; rmse                     0.212713   0.224664
+#&gt; rmsle                    0.086819   0.091711</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;    predict
+#&gt; 1 1.491070
+#&gt; 2 1.687386
+#&gt; 3 1.833314
+#&gt; 4 1.842537
+#&gt; 5 1.871452
+#&gt; 6 1.715574
+#&gt; 
+#&gt; [2858 rows x 1 column]</code></pre>
+</div>
+</div>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You can delete everything in here and start fresh.</p>
-</div>
-</div>
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -740,7 +1001,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

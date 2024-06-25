@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Joschka Schwarz">
-
-<title>MyLabJournal - Data Wrangling</title>
+<meta name="author" content="Miguel Peñate">
+<title>MyLabJournal - Automated Machine Learning with H20 (I)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +19,6 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -43,7 +39,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -69,17 +67,13 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
+}</script><link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">MyLabJournal</span>
@@ -91,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -99,25 +93,29 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-journal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Journal</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-journal">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-journal">
+<li>
     <a class="dropdown-item" href="../../content/01_journal/01_tidyverse.html">
- <span class="dropdown-text">01 Tidyverse</span></a>
+ <span class="dropdown-text">01 Machine Learning Fundamentals</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/02_data_acquisition.html">
- <span class="dropdown-text">02 Data Acquisition</span></a>
+ <span class="dropdown-text">02 Supervised ML - Regression</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/03_data_wrangling.html">
- <span class="dropdown-text">03 Data Wrangling</span></a>
+ <span class="dropdown-text">03 Automated Machine Learning with H20 (I)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../content/01_journal/04_data_visualization.html">
  <span class="dropdown-text">04 Data Visualization</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../content/01_journal/05_performance_measures.html">
+ <span class="dropdown-text">05 Performance Measures</span></a>
+  </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item">
     <a class="nav-link" href="../../content/02_notes/05_class_notes.html"> 
 <span class="menu-text">Class notes</span></a>
@@ -127,26 +125,20 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Links</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Data Wrangling</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Automated Machine Learning with H20 (I)</h1>
 </div>
 
 
@@ -156,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Joschka Schwarz </p>
+             <p>Miguel Peñate </p>
           </div>
   </div>
     
@@ -166,27 +158,92 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
+</header><section id="task" class="level3"><h3 class="anchored" data-anchor-id="task">TASK</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="03_data_wrangling_files/figure-html/plot-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>You can delete everything in here and start fresh.</p>
+</div>
+<ol type="1">
+<li>Compensation Features</li>
+</ol>
+<p>What can you deduce about the interaction between Monthly Income and Attrition?</p>
+<p>Those that are leaving the company have a higher Monthly Income That those are staying have a lower Monthly Income <strong>✔ Those that are leaving have a lower Monthly Income</strong> It’s difficult to deduce anything based on the visualization</p>
+<p>Justification: In the boxplot for Monthly Income, it is observed that employees who have left the company (Yes) have a lower monthly income range compared to those who have stayed (No). In addition, the density of monthly income for those who have left the company is higher at the lower income levels.</p>
+<p><strong>Question 2</strong> What can you deduce about the interaction between Percent Salary Hike and Attrition?</p>
+<p>Those that are leaving the company have a higher Percent Salary Hike Those that are staying have a lower Percent Salary Hike ** ✔Those that are leaving have lower Percent Salary Hike** It’s difficult to deduce anything based on the visualization</p>
+<p>In the boxplot for Percent Salary Hike, it can be seen that employees who have left the company (Yes) have, on average, a lower percentage salary increase compared to those who have stayed (No).</p>
+<p><strong>Question 3</strong> What can you deduce about the interaction between Stock Option Level and Attrition?</p>
+<p>Those that are leaving the company have a higher stock option level Those that are staying have a higher stock option level <strong>✔ It’s difficult to deduce anything based on the visualization</strong></p>
+<p>The box-and-whisker plot shows that employees who stay (No) have a distribution with higher levels of stock options compared to employees who leave (Yes), who tend to have lower levels.</p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="03_data_wrangling_files/figure-html/plot2-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
 </div>
 </div>
+</div>
+<p><strong>Question 4</strong></p>
+<p>What can you deduce about the interaction between Environment Satisfaction and Attrition?</p>
+<p>A higher proportion of those leaving have a low environment satisfaction level <strong>✔ A higher proportion of those leaving have a high environment satisfaction level</strong> It’s difficult to deduce anything based on the visualization</p>
+<p>Low levels of satisfaction with the environment (1 and 2) show a higher proportion of employees leaving the company compared to those with high levels of satisfaction (3 and 4). This can be seen in the distribution of the density curves, where the areas under the curves for “Yes” are larger at lower levels of satisfaction with the environment.</p>
+<p><strong>Question 5</strong> What can you deduce about the interaction between Work Life Balance and Attrition</p>
+<p><strong>✔Those that are leaving have higher density of 2’s and 3’s</strong> Those that are staying have a higher density of 2’s and 3’s Those that are staying have a lower density of 2’s and 3’s It’s difficult to deduce anything based on the visualization</p>
+<p>Justification: In the graph, the density of those who leave the company (blue colour) is highest at values 2 and 3 for Work Life Balance. This indicates that people with these work-life balance values have a higher tendency to leave the company.</p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="03_data_wrangling_files/figure-html/plot3-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="03_data_wrangling_files/figure-html/plot4-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question 7</strong> What can you deduce about the interaction between Over Time and Attrition?</p>
+<p><strong>✔ The proportion of those leaving that are working Over Time are high compared to those that are not leaving</strong> The proportion of those staying that are working Over Time are high compared to those that are not staying</p>
+<p><strong>Justification:</strong> In the graph, it is observed that a higher proportion of employees working overtime are leaving the company (blue colour) compared to those who are not working overtime. This indicates that working overtime is associated with a higher attrition rate.</p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="03_data_wrangling_files/figure-html/plot5-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question 8</strong> What can you deduce about the interaction between Training Times Last Year and Attrition</p>
+<p>People that leave tend to have more annual trainings <strong>✔ People that leave tend to have less annual trainings</strong> It’s difficult to deduce anything based on the visualization</p>
+<p>Justification: In the graph, we observe that those who leave the company (blue colour) tend to have fewer trainings per year compared to those who stay (red colour). The density is higher at lower values of “Training Times Last Year” for leavers, indicating that a lower amount of training is associated with a higher attrition rate.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="03_data_wrangling_files/figure-html/plot6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="03_data_wrangling_files/figure-html/plot6-1.png" class="img-fluid figure-img" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question 9</strong> What can you deduce about the interaction between Years At Company and Attrition</p>
+<p>People that leave tend to have more working years at the company <strong>✔ People that leave tend to have less working years at the company</strong> It’s difficult to deduce anything based on the visualization</p>
+<p>Justification: In the graph, we observe that the density of those who leave the company (blue colour) is higher in the first years of employment compared to those who stay (red colour). This indicates that people who have been with the company for fewer years tend to leave more than those who have been with the company longer.</p>
+<p><strong>Question 10</strong> What can you deduce about the interaction between Years Since Last Promotion and Attrition?</p>
+<p>Those that are leaving have more years since last promotion than those that are staying <strong>✔ Those that are leaving have fewer years since last promotion than those that are staying</strong> It’s difficult to deduce anything based on the visualization</p>
+<p>Justification: In the graph, we can observe that the density of those who leave the company (blue colour) is higher in the first years since their last promotion compared to those who stay (red colour). This indicates that people who have spent less time since their last promotion tend to leave the company more than those who have spent more time since their last promotion.</p>
 
 
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -740,8 +797,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
 
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
 
+};
+          </script>
 
 
 </body></html>
