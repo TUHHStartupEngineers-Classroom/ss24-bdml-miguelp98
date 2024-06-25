@@ -15,7 +15,7 @@ website:
       - text: "Journal"
         menu: 
           - text: "01 Machine Learning Fundamentals"
-            file: content/01_journal/01_tidyverse.qmd
+            file: content/01_journal/01_machinelearningfundamentals.qmd.qmd
           - text: "02 Supervised ML - Regression"
             file: content/01_journal/02_data_acquisition.qmd
           - text: "03 Automated Machine Learning with H20 (I)"
