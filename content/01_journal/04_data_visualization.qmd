@@ -6,6 +6,8 @@ format:
     code-fold: true
     self-contained: false
 ---
+> Here you can find the model that is going to be used in the next chapter - Performance Measures.
+
 ```{r plot1, fig.width=18, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
 library(h2o)
 library(tidyverse)

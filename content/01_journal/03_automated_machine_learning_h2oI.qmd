@@ -1,0 +1,218 @@
+---
+title: "Automated Machine Learning with H20 (I)"
+author: "Miguel Peñate"
+format:
+  html:
+    code-fold: true
+    self-contained: false
+---
+
+### TASK
+```{r plot, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+setwd("C:/Users/migue/Desktop/Hamburg/TUHH/ss24-bdML-miguelp98")
+library(tidyverse)
+library(readxl)
+library(skimr)
+library(GGally)
+
+# Load Data data definitions
+ employee_attrition_tbl <- read_csv("datasets-1067-1925-WA_Fn-UseC_-HR-Employee-Attrition.csv")
+definitions_raw_tbl   <- read_excel("data_definitions.xlsx", sheet = 1, col_names = FALSE)
+
+# Create data tibble, to potentially debug the plot_ggpairs function (because it has a data argument)
+data <- employee_attrition_tbl %>%
+    select(Attrition, Age, Gender, MaritalStatus, NumCompaniesWorked, Over18, DistanceFromHome)
+
+plot_ggpairs <- function(data, color = NULL, density_alpha = 0.5) {
+    
+    color_expr <- enquo(color)
+    
+    if (rlang::quo_is_null(color_expr)) {
+        
+        g <- data %>%
+            ggpairs(lower = "blank") 
+        
+    } else {
+        
+        color_name <- quo_name(color_expr)
+        
+        g <- data %>%
+            ggpairs(mapping = aes_string(color = color_name), 
+                    lower = "blank", legend = 1,
+                    diag = list(continuous = wrap("densityDiag", 
+                                                  alpha = density_alpha))) +
+            theme(legend.position = "bottom")
+    }
+    
+    return(g)
+    
+}
+
+# Explore Features by Category
+
+#   3. Compensation features: HourlyRate, MonthlyIncome, StockOptionLevel 
+employee_attrition_tbl %>%
+    select(Attrition, contains("income"), contains("rate"), contains("salary"), contains("stock")) %>%
+    plot_ggpairs(Attrition)
+
+```
+
+## **1. Compensation Features**
+
+### Question 1: What can you deduce about the interaction between Monthly Income and Attrition?
+
+a. Those that are leaving the company have a higher Monthly Income.
+
+b. That those are staying have a lower Monthly Income.
+
+c. **✔ Those that are leaving have a lower Monthly Income.**
+
+d. It's difficult to deduce anything based on the visualization
+
+Justification:
+In the boxplot for Monthly Income, it is observed that employees who have left the company (Yes) have a lower monthly income range compared to those who have stayed (No).
+In addition, the density of monthly income for those who have left the company is higher at the lower income levels.
+
+## **2. Comensation Features**
+
+### Question 2: What can you deduce about the interaction between Percent Salary Hike and Attrition?
+
+a.Those that are leaving the company have a higher Percent Salary Hike.
+
+b.Those that are staying have a lower Percent Salary Hike.
+
+c. **✔Those that are leaving have lower Percent Salary Hike.**
+
+d. It's difficult to deduce anything based on the visualization
+
+Justification: In the boxplot for Percent Salary Hike, it can be seen that employees who have left the company (Yes) have, on average, a lower percentage salary increase compared to those who have stayed (No).
+
+## **3. Compensation Features**
+### Question 3: What can you deduce about the interaction between Stock Option Level and Attrition?
+
+a. Those that are leaving the company have a higher stock option level.
+
+b. Those that are staying have a higher stock option level.
+
+c. **✔ It's difficult to deduce anything based on the visualization.**
+
+Justification: The box-and-whisker plot shows that employees who stay (No) have a distribution with higher levels of stock options compared to employees who leave (Yes), who tend to have lower levels.
+
+---
+
+```{r plot2, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+# Survery Results
+# Survey Results: Satisfaction level
+employee_attrition_tbl %>%
+    select(Attrition, contains("EnviromentSatisfaction"), contains("JobSatisfaction"), contains("RelationshipSatisfaction"), contains("WorkLifeBalance")) %>%
+    plot_ggpairs(Attrition)
+```
+
+## **4. Survey Results**
+
+### Question 4: What can you deduce about the interaction between Environment Satisfaction and Attrition?
+
+a. A higher proportion of those leaving have a low environment satisfaction level.
+
+b. **✔ A higher proportion of those leaving have a high environment satisfaction level.**
+
+c. It's difficult to deduce anything based on the visualization.
+
+Justification: Low levels of satisfaction with the environment (1 and 2) show a higher proportion of employees leaving the company compared to those with high levels of satisfaction (3 and 4). This can be seen in the distribution of the density curves, where the areas under the curves for "Yes" are larger at lower levels of satisfaction with the environment.
+
+## **5. Survey Results**
+### Question 5: What can you deduce about the interaction between Work Life Balance and Attrition
+
+a. **✔Those that are leaving have higher density of 2's and 3's**
+
+b. Those that are staying have a higher density of 2's and 3's
+
+c. Those that are staying have a lower density of 2's and 3's
+
+d. It's difficult to deduce anything based on the visualization
+
+Justification:
+In the graph, the density of those who leave the company (blue colour) is highest at values 2 and 3 for Work Life Balance. This indicates that people with these work-life balance values have a higher tendency to leave the company.
+
+---
+
+```{r plot3, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+employee_attrition_tbl %>%
+    select(Attrition, contains("JobInvolvement"), contains("PerformanceRating")) %>%
+    plot_ggpairs(Attrition)
+
+```
+
+```{r plot4, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+employee_attrition_tbl %>%
+    select(Attrition, contains("overtime"), contains("travel")) %>%
+    plot_ggpairs(Attrition)
+
+```
+
+### **7. Work-Life Features**
+
+## Question 7: What can you deduce about the interaction between Over Time and Attrition?
+
+a. **✔ The proportion of those leaving that are working Over Time are high compared to those that are not leaving**
+
+b. The proportion of those staying that are working Over Time are high compared to those that are not staying
+
+Justification:
+In the graph, it is observed that a higher proportion of employees working overtime are leaving the company (blue colour) compared to those who are not working overtime. This indicates that working overtime is associated with a higher attrition rate.
+---
+```{r plot5, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+employee_attrition_tbl %>%
+    select(Attrition, contains("training"), contains("education")) %>%
+    plot_ggpairs(Attrition)
+
+```
+## **8. Training and Education**
+
+### Question 8: What can you deduce about the interaction between Training Times Last Year and Attrition
+
+a. People that leave tend to have more annual trainings
+
+b. **✔ People that leave tend to have less annual trainings**
+
+c. It's difficult to deduce anything based on the visualization
+
+Justification:
+In the graph, we observe that those who leave the company (blue colour) tend to have fewer trainings per year compared to those who stay (red colour). The density is higher at lower values of "Training Times Last Year" for leavers, indicating that a lower amount of training is associated with a higher attrition rate.
+
+```{r plot6, fig.width=10, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+employee_attrition_tbl %>%
+    select(Attrition, contains("years")) %>%
+    plot_ggpairs(Attrition)
+
+```
+## **9. Time-Based Features**
+
+### Quesiton 9: What can you deduce about the interaction between Years At Company and Attrition
+
+a. People that leave tend to have more working years at the company.
+
+b. **✔ People that leave tend to have less working years at the company.**
+
+c. It's difficult to deduce anything based on the visualization.
+
+Justification:
+In the graph, we observe that the density of those who leave the company (blue colour) is higher in the first years of employment compared to those who stay (red colour). This indicates that people who have been with the company for fewer years tend to leave more than those who have been with the company longer.
+
+## **10. Time-Based Features**
+
+### Question 10: What can you deduce about the interaction between Years Since Last Promotion and Attrition?
+
+a. Those that are leaving have more years since last promotion than those that are staying.
+
+b. **✔ Those that are leaving have fewer years since last promotion than those that are staying.**
+
+c. It's difficult to deduce anything based on the visualization.
+
+Justification:
+In the graph, we can observe that the density of those who leave the company (blue colour) is higher in the first years since their last promotion compared to those who stay (red colour). This indicates that people who have spent less time since their last promotion tend to leave the company more than those who have spent more time since their last promotion.

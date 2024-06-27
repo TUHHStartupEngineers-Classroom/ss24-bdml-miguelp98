@@ -1,21 +1,10 @@
 ---
 title: "My Lab Journal"
 subtitle: "Business Data Science Basics"
-author: "Joschka Schwarz"
+author: "Miguel Peñate Arrieta"
 ---
 
-![](assets/logo/logo.png){width=80% fig-align="center"}
+![](assets/logo/newlogo.png){width=80% fig-align="center"}
 
-This is a template example for lab journaling. Students in the data science courses at the Institute of Entrepreneurship will use this template to learn R for business analytics. Students can replace this text as they wish.
+Welcome to my online portfolio. I’m Miguel, a passionate Industrial Engineer from the esteemed Politécnica de Madrid, in Spain. Currently, I’m expanding my horizons as an Erasmus student at TUHH, where I’m delving into the dynamic world of Data Science. On this website, you’ll have the opportunity to follow my journey through the Data Science course, as I share my progress and insights step by step. Enjoy your visit!
 
-## How to use
-
-1. Accept the assignment and get your own github repo.
-
-2. Blog/journal what you are doing in R, by editing the `.qmd` files. 
-
-3. See the links page for lots of helpful links on learning R.
-
-4. Change everything to make it your own.
-
-5. Make sure to render you website everytime before you want to upload changes

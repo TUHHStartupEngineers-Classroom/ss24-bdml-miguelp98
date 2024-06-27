@@ -1,8 +1,8 @@
 {
-  "hash": "05a0f578ea739a295f6b1768bc6728a0",
+  "hash": "5e143626d08f2ba1f07592ab0c312afa",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Explaining Black-Box Models With LIME\"\nauthor: \"Miguel Peñate\"\nformat:\n  html:\n    code-fold: true\n    self-contained: false\n---\n\n::: {.cell}\n\n:::\n\n![Explicación de LIME](case1.png)\n\n---\n",
+    "markdown": "---\ntitle: \"Explaining Black-Box Models With LIME\"\nauthor: \"Miguel Peñate\"\nformat:\n  html:\n    code-fold: true\n    self-contained: false\n---\n\n::: {.cell}\n\n:::\n\n\n## ![Explicación de LIME](case1.png)\n\nf\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

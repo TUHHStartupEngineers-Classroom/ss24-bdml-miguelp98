@@ -58,5 +58,7 @@ format:
 # plot_features_custom(case_1)
 
 ```
-![Explicación de LIME](case1.png)
----
+
+## ![Explicación de LIME](case1.png)
+
+f

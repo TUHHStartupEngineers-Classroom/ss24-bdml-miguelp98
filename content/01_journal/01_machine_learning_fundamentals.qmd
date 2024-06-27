@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning Fundamentals"
-author: "Miguel"
+author: "Miguel Peñate"
 format:
   html:
     code-fold: true
