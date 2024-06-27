@@ -1,8 +1,82 @@
 ---
-title: "Data Visualization"
-author: "Joschka Schwarz"
+title: "Automated Machine Learning with H2O (II)"
+author: "Miguel Peñate"
+format:
+  html:
+    code-fold: true
+    self-contained: false
 ---
+> Here you can find the model that is going to be used in the next chapter - Performance Measures.
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+```{r plot1, fig.width=18, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+library(h2o)
+library(tidyverse)
+library(rsample)
+library(recipes)
+library(readr)
+
+setwd("C:/Users/migue/Desktop/Hamburg/TUHH/ss24-bdML-miguelp98")
+# Inicializar H2O
+h2o.init()
+
+# initialise dataset
+data <- read_csv("product_backorders.csv")
+
+# structure verification
+glimpse(data)
+
+# clean data
+data_clean <- data %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(across(where(is.factor), as.numeric)) %>%
+  replace_na(list(0))
+
+# split into training and test data
+set.seed(1234)
+split <- initial_split(data_clean, prop = 0.85)
+train <- training(split)
+test <- testing(split)
+
+# convert to H2O Frame
+train_h2o <- as.h2o(train)
+test_h2o <- as.h2o(test)
+
+# define objective variable
+y <- "went_on_backorder"  # Columna objetivo
+x <- setdiff(names(train_h2o), y)
+
+# execute AutoML
+automl_models_h2o <- h2o.automl(
+  x = x,
+  y = y,
+  training_frame = train_h2o,
+  max_runtime_secs = 60, 
+  nfolds = 5,
+  exclude_algos = c("DeepLearning"), 
+  seed = 1234
+)
+
+# View the leaderboard
+leaderboard <- automl_models_h2o@leaderboard
+print(leaderboard)
+
+# obtain leader model
+leader <- automl_models_h2o@leader
+print(leader)
+
+# predict
+predictions <- h2o.predict(leader, test_h2o)
+print(predictions)
+
+# save leader model
+model_path <- h2o.saveModel(leader, path = "h2o_models", force = TRUE)
+print(model_path)
+
+# load
+loaded_model <- h2o.loadModel(model_path)
+print(loaded_model)
+
+# predict
+loaded_predictions <- h2o.predict(loaded_model, test_h2o)
+print(loaded_predictions)
+```

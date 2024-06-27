@@ -1,0 +1,19 @@
+{
+  "hash": "eba5ab916b5101e684b37d2af6c8cf37",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Supervised ML - Regression (II)\"\nauthor: \"Miguel Peñate\"\nformat:\n  html:\n    code-fold: true\n    self-contained: false\n---\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n#> Rows: 14,447\n#> Columns: 2\n#> $ price  <dbl> 3119, 5359, 2729, 1749, 1219, 1359, 2529, 1559, 3899, 6629, 291…\n#> $ weight <dbl> 13.80, 7.44, 14.06, 8.80, 11.50, 8.80, 8.20, 8.85, 14.40, 6.50,…\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stdout}\n\n```\n#> # A tibble: 3 × 3\n#>   .metric .estimator .estimate\n#>   <chr>   <chr>          <dbl>\n#> 1 rmse    standard   4.66     \n#> 2 rsq     standard   0.0000491\n#> 3 mae     standard   3.72\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](02_data_acquisition_files/figure-html/plot1-1.png){width=1728}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

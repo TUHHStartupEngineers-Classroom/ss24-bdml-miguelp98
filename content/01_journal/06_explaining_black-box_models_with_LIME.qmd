@@ -1,0 +1,64 @@
+---
+title: "Explaining Black-Box Models With LIME"
+author: "Miguel Peñate"
+format:
+  html:
+    code-fold: true
+    self-contained: false
+---
+
+```{r, echo=FALSE}
+#library(h2o)
+#library(recipes)
+#library(readxl)
+#library(tidyverse)
+#library(tidyquant)
+#library(lime)
+
+# Cargar el modelo previamente guardado
+# h2o.init()
+# automl_leader <- h2o.loadModel("04_Modeling/h2o_new/StackedEnsemble_BestOfFamily_2_AutoML_4_20240624_171417")
+
+# Predecir con el modelo cargado
+#predictions_tbl <- automl_leader %>% 
+ # h2o.predict(newdata = as.h2o(test_tbl)) %>%
+#  as_tibble() %>%
+ # bind_cols(
+  #  test_tbl %>%
+   #   select(Attrition, EmployeeNumber)
+ # )
+
+# Filtrar para el primer caso
+# case_1 <- explanation %>% filter(case == 1)
+
+# Convertir feature_weight a vector numérico
+# case_1$feature_weight <- sapply(case_1$feature_weight, as.numeric)
+
+# Función personalizada para plot_features
+# plot_features_custom <- function(explanation) {
+#  ggplot(explanation, aes(x = reorder(feature, feature_weight), y = feature_weight, fill = feature_weight > 0)) +
+ #   geom_col() +
+#    coord_flip() +
+#    theme_minimal() +
+ #   labs(
+ #     title = paste("Case:", unique(explanation$case)),
+#      subtitle = paste("Label:", unique(explanation$label), 
+ #                      "\nProbability:", round(as.numeric(unique(explanation$label_prob)), 2), 
+   #                     "\nExplanation Fit:", round(as.numeric(unique(explanation$model_r2)), 2)),
+ #      x = "Feature",
+ #      y = "Weight"
+#     ) +
+#     scale_fill_manual(values = c("red", "blue"), 
+ #                      labels = c("Contradicts", "Supports")) +
+ #    theme(legend.position = "bottom", 
+ #          legend.title = element_blank())
+# }
+
+# Graficar las características para el primer caso
+# plot_features_custom(case_1)
+
+```
+
+## ![Explicación de LIME](case1.png)
+
+f

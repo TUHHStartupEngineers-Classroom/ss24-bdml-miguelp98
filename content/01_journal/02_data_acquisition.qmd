@@ -1,8 +1,75 @@
 ---
-title: "Data Acquisition"
-author: "Joschka Schwarz"
+title: "Supervised ML - Regression (II)"
+author: "Miguel Peñate"
+format:
+  html:
+    code-fold: true
+    self-contained: false
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+
+```{r plot1, fig.width=18, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+# Load necessary libraries
+library(tidymodels)
+library(dplyr)
+library(ggplot2)
+
+setwd("C:/Users/migue/Desktop/Hamburg/TUHH/ss24-bdML-miguelp98")
+# Load the data
+bike_data_tbl <- readRDS("raw_data/bike_orderlines.rds")
+
+# Filter the data to exclude the "Gravel" category
+bike_data_filtered_tbl <- bike_data_tbl %>%
+  filter(category_1 != "Gravel")
+
+# Create the recipe object
+recipe_obj <- recipe(weight ~ price + category_1, data = bike_data_filtered_tbl) %>%
+  step_rm(category_1) %>% # Remove the category_1 column
+  step_dummy(all_nominal(), -all_outcomes()) # Convert categorical variables to dummy variables
+
+# Verify transformed data
+train_transformed_tbl <- bake(prep(recipe_obj), new_data = NULL)
+glimpse(train_transformed_tbl)
+
+# Create and fit the model using workflow
+model <- linear_reg(mode = "regression") %>%
+  set_engine("lm")
+
+workflow_obj <- workflow() %>%
+  add_model(model) %>%
+  add_recipe(recipe_obj)
+
+# Split the data into training and testing sets
+set.seed(555)
+data_split <- initial_split(bike_data_filtered_tbl, prop = 3/4)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+
+# Fit the model with the training data
+fit_model <- workflow_obj %>%
+  fit(data = train_data)
+
+# Evaluate the model with the testing data
+predictions <- predict(fit_model, test_data)
+results <- bind_cols(test_data, predictions) %>%
+  mutate(error = weight - .pred)
+
+# Measure model performance using yardstick
+metrics <- results %>%
+  metrics(truth = weight, estimate = .pred)
+
+# Print evaluation metrics
+print(metrics)
+
+# Plot predictions vs actual values
+plot <- ggplot(results, aes(x = weight, y = .pred)) +
+  geom_point() +
+  geom_abline(color = "red") +
+  labs(title = "Predictions vs Actual Values",
+       x = "Actual Weight",
+       y = "Predicted Weight")
+print(plot)
+
+```
+
